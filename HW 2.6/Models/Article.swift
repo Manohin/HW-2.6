@@ -25,5 +25,4 @@ struct Article {
             Article(name: "Имя пользователя 8", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices nibh sit amet sapien malesuada, quis iaculis ipsum tristique. Curabitur id placerat nunc, eget condimentum elit. Quisque lacus ex, congue nec lacinia et, ornare vel nulla. Curabitur convallis efficitur nisl a fermentum. Aenean sapien sapien, tristique vel risus sed, varius porttitor mauris. Nulla tempor urna tristique est iaculis, quis feugiat arcu commodo. Mauris viverra cursus nisi at convallis. Phasellus vitae interdum quam. Mauris et mollis ligula, eu ultrices turpis. Quisque id felis non ligula dictum commodo. Mauris eu ligula rhoncus, lobortis orci nec, dignissim est. Etiam enim risus, dictum vitae magna nec, varius pharetra nibh. Morbi sit amet purus sed urna feugiat aliquam. Quisque eget dolor quis nisl imperdiet suscipit. Proin non aliquet sapien, vitae varius lectus. Vestibulum iaculis felis sed est finibus ullamcorper. Morbi at elit ipsum. Integer ultricies erat vitae nunc sagittis ultrices.", image: "2")
         ]
     }
-    
 }

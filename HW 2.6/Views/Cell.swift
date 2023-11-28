@@ -11,7 +11,12 @@ final class Cell: UITableViewCell {
     
     static let cellId = "cell"
     
-    private let backgroundViewColor = UIColor(red: 0.941, green: 0.941, blue: 0.941, alpha: 1)
+    private let backgroundViewColor = UIColor(
+        red: 0.941,
+        green: 0.941,
+        blue: 0.941,
+        alpha: 1
+    )
     
     lazy var nameLabel = {
         let label = UILabel()
@@ -30,7 +35,12 @@ final class Cell: UITableViewCell {
     lazy var detailButton = {
         let button = UIButton()
         button.setTitle("Подробнее", for: .normal)
-        button.backgroundColor = UIColor(red: 0, green: 0.611, blue: 0.355, alpha: 1)
+        button.backgroundColor = UIColor(
+            red: 0,
+            green: 0.611,
+            blue: 0.355,
+            alpha: 1
+        )
         button.layer.cornerRadius = 20
         return button
     }()
@@ -43,16 +53,18 @@ final class Cell: UITableViewCell {
     }()
     
     lazy var phoneButton = {
-        let button = UIButton(primaryAction: UIAction(handler: {_ in
-            print("Звоним...")
-        }))
-        button.setImage(UIImage(named: "phoneButton"), for: .normal)
+        let button = UIButton(
+            primaryAction: UIAction(handler: {_ in
+                print("Звоним...")
+            }))
+        button.setImage(
+            UIImage(named: "phoneButton"), for: .normal)
         return button
     }()
     
     lazy var peopleButton = {
         let button = UIButton(primaryAction: UIAction(handler: {_ in
-           print("Открываем контакт пользователя")
+            print("Открываем контакт пользователя")
         }))
         button.setImage(UIImage(named: "peopleButton"), for: .normal)
         return button
@@ -62,9 +74,16 @@ final class Cell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.backgroundColor = backgroundViewColor
-        [nameLabel, bodyLabel, detailButton, newsImage, phoneButton, peopleButton].forEach {
+        [
+            nameLabel,
+            bodyLabel,
+            detailButton,
+            newsImage,
+            phoneButton,
+            peopleButton
+        ].forEach {
             contentView.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.translatesAutoresizingMaskIsFalse()
         }
         setConstraints()
     }
@@ -73,8 +92,14 @@ final class Cell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setup(article: Article, indexPath: IndexPath) {
+        self.bodyLabel.text = article.body
+        self.nameLabel.text = article.name
+        self.newsImage.image = UIImage(named: article.image)
+        self.detailButton.tag = indexPath.row
+    }
+    
     private func setConstraints() {
-
         NSLayoutConstraint.activate([
             newsImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             newsImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
@@ -104,11 +129,5 @@ final class Cell: UITableViewCell {
             detailButton.heightAnchor.constraint(equalToConstant: 45),
             detailButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -32)
         ])
-    }
-}
-
-extension UIView {
-    func applyBackgroundColor() {
-        self.backgroundColor = UIColor(red: 0.941, green: 0.941, blue: 0.941, alpha: 1)
     }
 }

@@ -16,8 +16,6 @@ final class DetailViewController: UIViewController {
         label.numberOfLines = 0
         label.font = UIFont(name: "Helvetica-Bold", size: 20)
         label.text = article?.name
-        label.layer.borderColor = CGColor(gray: 0.4, alpha: 1)
-        label.layer.borderWidth = 2
         return label
     }()
     
@@ -27,36 +25,30 @@ final class DetailViewController: UIViewController {
         label.font = UIFont(name: "Helvetica", size: 14)
         label.text = article?.body
         label.adjustsFontSizeToFitWidth = true
-        label.layer.borderColor = CGColor(gray: 0.4, alpha: 1)
-        label.layer.borderWidth = 2
         return label
     }()
     
     lazy var newsImage: UIImageView = {
         let view = UIImageView()
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.image = UIImage(named: article?.image ?? "")
-        view.layer.borderColor = CGColor(gray: 0.4, alpha: 1)
-        view.layer.borderWidth = 2
         return view
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.applyBackgroundColor()
-        
-        [nameLabel, bodyLabel, newsImage].forEach {
-            view.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
+        setupViews()
         setupConstraints()
     }
-    
-    private func setupConstraints() {
+}
+
+// MARK: - Private methods
+private extension DetailViewController {
+    func setupConstraints() {
      
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             nameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             nameLabel.heightAnchor.constraint(equalToConstant: 32),
@@ -65,11 +57,20 @@ final class DetailViewController: UIViewController {
             newsImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             newsImage.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 16),
             newsImage.heightAnchor.constraint(equalToConstant: view.bounds.width - 32),
+            newsImage.widthAnchor.constraint(equalToConstant: view.bounds.width - 32),
   
             bodyLabel.topAnchor.constraint(equalTo: newsImage.bottomAnchor, constant: 16),
             bodyLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             bodyLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            bodyLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16)
+            bodyLabel.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -16)
         ])
+    }
+    func setupViews() {
+        view.applyBackgroundColor()
+        newsImage.layer.cornerRadius = 20
+        [nameLabel, bodyLabel, newsImage].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIsFalse()
+        }
     }
 }
